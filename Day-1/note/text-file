@@ -1,0 +1,11 @@
+Node JS est ce qui est utilisé dans les appli en temps réel comme les jeux, les chats, APIs test/GraphQL 
+Donne accès à des processus, pas de GUI juste le backend
+"let" et "var" sont modifiables mais pas "const"
+Pour faire un tableau on utilise "array" ou "new array"
+Pour créer un tableau dans un tableau [[(fois 2)
+Pour créer un objet; const objet
+instance1 = [{l'objet en question}[
+Pour merger des objets; ...arr1, et ...arr2 dans le fichier ou tu veux le merger
+Pour les conditions ;
+for (let i = 0; i<name.length; i+++)
+...console.log(name[i[)
