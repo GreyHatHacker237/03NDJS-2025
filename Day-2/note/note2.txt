@@ -1,0 +1,36 @@
+-Fonctions Asynchrones
+-Tant que la fonction asynchrone n'est pas terminé, on ne peut faire une autre sauf avec des events qui mettra la fonction asynchrone en stand-by
+-Un call-back c'est une fxn qui est passé comme un arg, executé après que la fxn asy se termine( ici tu dois la faire direct après que la fxn soit executé)
+Exple: 
+const fs = require("fs"):
+fs.readFile("file.txt", "utf8", (err, data) ={
+ if (err) {
+  console.error("Error:", err);
+  return;
+  }
+ console.log(a, b, c);
+});
+});
+});
+-Une Promesse est un obj qui represente un resultat futur qu'elle soit un succès ou une erreur(tu peux  aller traiter une autre fxn avant de venir la continuer)
+exple:
+const fs = require("fs").promises;
+fs.readFile("file.txt", "utf-8")
+//succes
+.then((data)= {
+ console.log("content. ", data);
+})
+//fail
+.catch(error) = {
+  console.log("Error: ", error);
+});
+-async fonction syntax:
+async function fetchData(url, queries){
+await axios.get(url, queries)
+.then(data) = {
+})
+.catch((err) = {
+})
+
+}
+
