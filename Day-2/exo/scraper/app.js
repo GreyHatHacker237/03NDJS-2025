@@ -1,47 +1,31 @@
-// app.js
+
 const cheerio = require('cheerio');
-const https = require('https');
+const fs = require('fs');
 
 async function scrapeData() {
   const url = 'https://fr.wikipedia.org/wiki/Liste_des_pays_par_population';
 
   try {
-    const html = await new Promise((resolve, reject) => {
-      https.get(url, (res) => {
-        let data = '';
-        res.on('data', chunk => (data += chunk));
-        res.on('end', () => resolve(data));
-      }).on('error', reject);
-    });
+    const $ = await cheerio.fromURL(url);
 
-    const $ = cheerio.load(html);
-
-    const tableau = $('table.wikitable').first();
-    const resultats = [];
-
-    tableau.find('tbody tr').each((index, row) => {
+    const results = [];
+    $('table.wikitable').first().find('tbody tr').each((index, row) => {
       const cells = $(row).find('td');
-
+      
       if (cells.length >= 4) {
-        const rang = $(cells[0]).text().trim();
-        const pays = $(cells[1]).text().trim();
-        const population = $(cells[2]).text().trim();
-        const pourcentage = $(cells[3]).text().trim(); // ✅ nouvelle colonne
-
-        resultats.push({
-          rang,
-          pays,
-          population,
-          pourcentage
+        results.push({
+          rang: $(cells[0]).text().trim(),
+          pays: $(cells[1]).text().trim(),
+          population: $(cells[2]).text().trim(),
+          dateReference: $(cells[3]).text().trim()
         });
       }
     });
 
-    console.table(resultats.slice(0, 10));
+    fs.writeFileSync('pays-population.json',));
   } catch (err) {
     console.error('❌ Erreur:', err.message);
   }
 }
 
 scrapeData();
-
